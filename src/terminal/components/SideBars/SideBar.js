@@ -1,64 +1,74 @@
 import React from 'react'
-import Section from './Section'
+import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import _ from 'lodash'
 
-const sections = [
-	{
-		label: 'Explore',
-		value: 'explore',
-		options: [
-			{
-				label: 'BoutIt',
-				value: 'boutit'	,
-				icon: 'FiZap'
-			},
-			{
-				label: 'Posts',
-				value: 'posts',
-				icon: 'FiImage'
-			},
-			{
-				label: 'People',
-				value: 'people',
-				icon: 'FiUser'
-			}
-		]
-	},
-	{
-		label: 'Admin',
-		value: 'admin',
-		options: [
-			{
-				label: 'BoutIt',
-				value: 'boutit'	,
-				icon: 'FiZap'
-			},
-			{
-				label: 'Posts',
-				value: 'posts',
-				icon: 'FiImage'
-			},
-			{
-				label: 'People',
-				value: 'people',
-				icon: 'FiUser'
-			}
-		]
-	}
-]
+import SideMenu from './SideMenu'
+import MenuOption from './MenuOption'
+import * as actionTypes from '../../store/actions/layout_actions'
+import logo from '../../../public/images/logo.png'
 
-const sideBar = (props) => (
-	<div className="hide-below-1150 width-250p flex-col height-100 background-white">
-		<div className="height-100 width-100 relative border-right-grey flex-col">
-			<div className="height-60p width-100 flex-col">
-				<div className="height-100 border-bottom-grey">
-
+const sideBar = ({
+	authenticatedRoutes,
+	createRoutes,
+	hideSlidingMenu,
+	history,
+	meRoutes,
+	sideMenu
+}) => (
+	<div>
+		<div className="hide-below-1000 width-250p flex-col height-100 background-white">
+			<div className="height-100 width-100 relative border-right-grey flex-col">
+				<div className="height-60p width-100 centered-vertical">
+					<div className="width-100 padding-horizontal-5 overflow-hidden">
+						<div className="flex-row overflow-hidden centered-vertical padding-5 radius-5 background-grey-hover pointer" onClick={() => history.push('/info')}>
+							<div className="flex-col centered-vertical margin-right-10">
+									<div className={`height-40p width-40p radius-5 centered overflow-hidden border-grey shadow-light`}>
+										<img src={logo} className="height-30p width-30p" alt="" />
+									</div>
+							</div>
+							<div className="text-ellipsis text-700 text-18 text-grey">tims crazy zoo fun zone ya didg fame</div>
+						</div>
+					</div>
+				</div>
+				<div className="flex-100 flex-col padding-vertical-10">
+					<div className="padding-horizontal-10">
+						<div className="text-12 text-grey text-700 margin-vertical-10 padding-horizontal-5">EXPLORE</div>
+						{(authenticatedRoutes).map((data, i) => <MenuOption key={i + data.value} i={i} data={data} history={history} />)}
+					</div>
 				</div>
 			</div>
-			<div className="flex-100 flex-col padding-vertical-10">
-				{sections.map((data, i) => <Section key={i + data.value} i={i} data={data} />)}
-			</div>
 		</div>
+		<SideMenu
+			authenticatedRoutes={authenticatedRoutes}
+			createRoutes={createRoutes}
+			hideSlidingMenu={hideSlidingMenu}
+			history={history}
+			meRoutes={meRoutes}
+			sideMenu={sideMenu}
+		/>
 	</div>
 )
 
-export default sideBar
+const mapStateToProps = state => {
+	return {
+		createRoutes: state.layout.createRoutes,
+		meRoutes: state.layout.meRoutes,
+		sideMenu: state.layout.sideMenu,
+		authenticatedRoutes: _.filter(state.layout.authenticatedRoutes, {'menuItem': true})
+	}
+}
+
+const mapDispatchToProps = dispatch => {
+	return {
+		hideSlidingMenu: () => dispatch({
+			type: actionTypes.HIDE_SIDE_MENU
+		}),
+		toggleSlidingMenu: () => dispatch({
+			type: actionTypes.TOGGLE_SIDE_MENU
+		})
+	}
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(sideBar))

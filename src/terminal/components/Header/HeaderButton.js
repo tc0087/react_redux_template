@@ -1,22 +1,34 @@
 import React from 'react'
-import {FiZap} from 'react-icons/fi'
+import { connect } from 'react-redux'
+import logo from '../../../public/images/logo.png'
+
+import * as actionTypes from '../../store/actions/layout_actions'
 
 const headerButton = (props) => (
 	<div className="flex-col centered height-100">
 		<div className="hide-above-1150 height-100">
-			<div className="height-100 width-60p centered">
-				<div className="height-40p width-40p centered radius-5 border-grey">
-					<FiZap
-						className="text-30"
-					/>
+			<div className="height-100 centered">
+				<div className={`height-40p width-40p radius-5 shadow-light centered overflow-hidden border-grey pointer`} onClick={props.toggleSideMenu}>
+					<img src={logo} className="height-30p width-30p" alt="" />
 				</div>
 			</div>
 		</div>
-		<div className="hide-below-1150">
+		<div className="hide-below-1000">
 			<div className="height-100 width-60p centered">
 			</div>
 		</div>
 	</div>
 )
 
-export default headerButton
+const mapDispatchToProps = dispatch => {
+	return {
+		hideSideMenu: () => dispatch({
+			type: actionTypes.HIDE_SIDE_MENU
+		}),
+		toggleSideMenu: () => dispatch({
+			type: actionTypes.TOGGLE_SIDE_MENU
+		})
+	}
+}
+
+export default connect(null, mapDispatchToProps)(headerButton)

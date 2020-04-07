@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Aux from '../../hoc/Aux'
-import * as actionTypes from '../../store/actions/actions'
+import * as actionTypes from '../../store/actions/layout_actions'
 
 class Dashboard extends Component{
 	state = {
@@ -30,7 +30,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		onIncrementCounter: () => dispatch({
-			type: actionTypes.INCREMENT,
+			type: actionTypes.HIDE_SEARCH_DROPDOWN,
 			val: 10
 		})
 	}

@@ -1,4 +1,4 @@
-import * as actionTypes from '../actions/actions'
+import * as actionTypes from '../actions/layout_actions'
 
 const intialState = {
 	counter: 0
@@ -6,7 +6,7 @@ const intialState = {
 
 const reducer = (state = intialState, action) => {
 	switch(action.type){
-		case actionTypes.INCREMENT:
+		case actionTypes.HIDE_SEARCH_DROPDOWN:
 			return {
 				...state,
 				counter: state.counter + action.val
