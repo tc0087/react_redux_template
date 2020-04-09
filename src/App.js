@@ -1,5 +1,6 @@
 import React from 'react';
 import parse from 'url-parse'
+
 import Terminal from './terminal/hoc/Terminal'
 import Editor from './editor/hoc/Editor'
 import WebApp from './web_app/hoc/WebApp'
@@ -15,5 +16,4 @@ const App = () => (
 	</div>
 )
 
-
-export default App;
+export default App

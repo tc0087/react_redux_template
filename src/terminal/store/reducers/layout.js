@@ -1,4 +1,4 @@
-import * as actionTypes from '../actions/layout_actions'
+import * as actionTypes from '../actions/actionTypes'
 import Boutit from '../../components/Boutit/Boutit'
 import Chats from '../../components/Chats/Chats'
 import CreateBoutit from '../../containers/CreateBoutit/CreateBoutit'
@@ -10,6 +10,8 @@ import Notifications from '../../components/Notifications/Notifications'
 import Posts from '../../components/Posts/Posts'
 import People from '../../components/People/People'
 import Products from '../../components/Products/Products'
+import Signup from '../../containers/Auth/Signup'
+import Login from '../../containers/Auth/Login'
 
 const intialState = {
 	adminRoutes: [
@@ -191,6 +193,26 @@ const intialState = {
 			path: '/chats',
 			route: 'chats',
 			value: 'chats'
+		}
+	],
+	publicRoutes: [
+		{
+			component: Signup,
+			icon: null,
+			label: 'Signup',
+			menuItem: false,
+			path: '/signup',
+			route: 'signup',
+			value: 'signup'	
+		},
+		{
+			component: Login,
+			icon: null,
+			label: 'Login',
+			menuItem: false,
+			path: '/login',
+			route: 'login',
+			value: 'login'	
 		}
 	],
 	searchDropdown: false,

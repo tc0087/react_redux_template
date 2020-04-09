@@ -5,13 +5,15 @@ import _ from 'lodash'
 
 import SideMenu from './SideMenu'
 import MenuOption from './MenuOption'
-import * as actionTypes from '../../store/actions/layout_actions'
+
+import * as actionCreators from '../../store/actions/index'
+
 import logo from '../../../public/images/logo.png'
 
 const sideBar = ({
 	authenticatedRoutes,
 	createRoutes,
-	hideSlidingMenu,
+	hideSideMenu,
 	history,
 	meRoutes,
 	sideMenu
@@ -42,7 +44,7 @@ const sideBar = ({
 		<SideMenu
 			authenticatedRoutes={authenticatedRoutes}
 			createRoutes={createRoutes}
-			hideSlidingMenu={hideSlidingMenu}
+			hideSideMenu={hideSideMenu}
 			history={history}
 			meRoutes={meRoutes}
 			sideMenu={sideMenu}
@@ -51,6 +53,7 @@ const sideBar = ({
 )
 
 const mapStateToProps = state => {
+	console.log(state.layout.sideMenu)
 	return {
 		createRoutes: state.layout.createRoutes,
 		meRoutes: state.layout.meRoutes,
@@ -61,14 +64,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		hideSlidingMenu: () => dispatch({
-			type: actionTypes.HIDE_SIDE_MENU
-		}),
-		toggleSlidingMenu: () => dispatch({
-			type: actionTypes.TOGGLE_SIDE_MENU
-		})
+		hideSideMenu: () => dispatch(actionCreators.hideSideMenu()),
+		toggleSideMenu: () => dispatch(actionCreators.toggleSideMenu())
 	}
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(sideBar))

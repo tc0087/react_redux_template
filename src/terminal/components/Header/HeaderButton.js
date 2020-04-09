@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import logo from '../../../public/images/logo.png'
 
-import * as actionTypes from '../../store/actions/layout_actions'
+import * as actionCreators from '../../store/actions/index'
 
 const headerButton = (props) => (
 	<div className="flex-col centered height-100">
@@ -22,12 +22,8 @@ const headerButton = (props) => (
 
 const mapDispatchToProps = dispatch => {
 	return {
-		hideSideMenu: () => dispatch({
-			type: actionTypes.HIDE_SIDE_MENU
-		}),
-		toggleSideMenu: () => dispatch({
-			type: actionTypes.TOGGLE_SIDE_MENU
-		})
+		hideSideMenu: () => dispatch(actionCreators.hideSideMenu()),
+		toggleSideMenu: () => dispatch(actionCreators.toggleSideMenu())
 	}
 }
 

@@ -1,30 +1,26 @@
 import React from 'react'
-import {createStore, combineReducers} from 'redux'
+import {createStore, combineReducers, applyMiddleware} from 'redux'
 import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 import Layout from '../layouts/Layout'
-import Dashboard from '../containers/Dashboard/Dashboard'
 
 // Reducers 
+import authReducer from '../store/reducers/auth'
 import layoutReducer from '../store/reducers/layout'
-import counterReducer from '../store/reducers/counter'
-import backgroundReducer from '../store/reducers/background'
 
 const rootReducer = combineReducers({
-	background: backgroundReducer,
-	ctr: counterReducer,
+	auth: authReducer,
 	layout: layoutReducer
 })
 
-const store = createStore(rootReducer)
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 const Terminal = (props) => (
 	<Provider store={store}>
 		<Router>
-			<Layout>
-				<Dashboard />
-			</Layout>
+			<Layout />
 		</Router>
 	</Provider>
 )

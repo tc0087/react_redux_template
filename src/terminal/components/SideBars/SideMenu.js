@@ -6,12 +6,12 @@ import logo from '../../../public/images/logo.png'
 const sideMenu = ({
 	authenticatedRoutes,
 	createRoutes,
-	hideSlidingMenu,
+	hideSideMenu,
 	history,
 	meRoutes,
 	sideMenu
 }) => (
-	<OutsideClickHandler onOutsideClick={hideSlidingMenu}>
+	<OutsideClickHandler onOutsideClick={hideSideMenu}>
 		<div id="mainMenu" className={`absolute-top height-100v background-white width-80 z99999 shadow-bottom flex-col ${sideMenu ? "menu-items-show" : "menu-items-hide"}`}>
 				<div className="height-60p width-100 centered-vertical">
 					<div className="width-100 padding-horizontal-5 overflow-hidden">

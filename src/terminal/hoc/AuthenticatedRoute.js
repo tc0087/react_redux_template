@@ -18,7 +18,7 @@ const authenticatedRoute = ({
 				...props,
 				...rest
 			})) :
-			(<Redirect to ="/" />)
+			(<Redirect to ="/login" />)
 		)}
 	/>
 )
